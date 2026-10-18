@@ -1,15 +1,15 @@
 # Docsify Starter
 
-> 一个精简的 Docsify v5 单语言起步模板：无构建、可离线，内置搜索、分页、封面、404 与深色模式。
+> 一个精简的 Docsify v5 起步模板：无构建、可离线，内置搜索、分页、封面、404、深色模式与中英文切换。
 
 ## 这是什么
 
 - **Docsify 5.0.0**：运行时把 Markdown 渲染成网站，不需要生成静态 HTML。
-- **单语言**：默认中文，没有 `en/` 目录，也没有语言切换脚本。
+- **中英文切换**：默认中文在根目录，英文示例在 `en/`；右下角「中 / EN」按钮切换，并保留当前页面。
 - **开箱即用**：侧边栏、顶部导航、封面页、全文搜索、上一节 / 下一节、404、深色模式。
 - **可选公众号二维码**：默认关闭，填写配置后显示右下角悬浮按钮。
 - **资源本地化**：`_script/` 与 `_style/` 内是完整运行文件，不依赖外部 CDN，离线也能预览。
-- **刻意精简**：不包含多语言、捐赠页和自定义导航下拉；需要这些能力时，可从完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 取用。
+- **刻意精简**：内置中英双语示例，但不包含 3 种以上语言、捐赠页和自定义导航下拉；更多能力可从完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 取用。
 
 ## 目录结构
 
@@ -24,12 +24,21 @@ docsify-starter/
 ├── about.md                   # 关于（占位页）
 ├── guide/
 │   └── start.md               # 快速开始 / 配置说明
+├── en/                        # 英文示例（只放必要文件）
+│   ├── README.md
+│   ├── _coverpage.md
+│   ├── _sidebar.md
+│   ├── _navbar.md
+│   ├── _404.md
+│   └── guide/
+│       └── start.md
 ├── _media/
 │   └── favicon.svg            # 站点图标（可替换）
 ├── _script/
 │   ├── docsify@5.min.js            # Docsify 5.0.0
 │   ├── docsify-search@5.min.js     # 全文搜索插件
 │   ├── docsify-pagination@2.10.1.min.js  # 上一节/下一节插件
+│   ├── i18n.js                     # 中英文切换
 │   ├── theme-toggle.js             # 深色模式切换
 │   └── wechat.js                   # 可选微信公众号二维码
 ├── _style/
@@ -71,18 +80,19 @@ python3 -m http.server 3000
 
 ### 五分钟清单
 
-| 要改什么             | 去哪里改                                            |
-| -------------------- | --------------------------------------------------- |
-| 站点名称             | `index.html` 的 `name`，以及 `<title>`              |
-| 首页内容             | `README.md`                                         |
-| 封面                 | `_coverpage.md`                                     |
-| 侧边栏               | `_sidebar.md`                                       |
-| 顶部导航             | `_navbar.md`                                        |
-| 关于页               | `about.md`                                          |
-| 404 页               | `_404.md`                                           |
-| GitHub 入口          | `index.html` 的 `repo`（完整 URL，留空隐藏）        |
-| 公众号二维码（可选） | `index.html` 的 `wechat` 配置，填写 `qrcode` 后显示 |
-| 主题色 / 字体        | `index.html` 的 `<head>` 内加 CSS 变量              |
+| 要改什么             | 去哪里改                                                        |
+| -------------------- | --------------------------------------------------------------- |
+| 站点名称             | `index.html` 的 `name`，以及 `<title>`                          |
+| 首页内容             | `README.md`                                                     |
+| 封面                 | `_coverpage.md`                                                 |
+| 侧边栏               | `_sidebar.md`                                                   |
+| 顶部导航             | `_navbar.md`                                                    |
+| 关于页               | `about.md`                                                      |
+| 404 页               | `_404.md`                                                       |
+| GitHub 入口          | `index.html` 的 `repo`（完整 URL，留空隐藏）                    |
+| 公众号二维码（可选） | `index.html` 的 `wechat` 配置，填写 `qrcode` 后显示             |
+| 英文页面             | 放在 `en/` 下，并在 `en/_sidebar.md` / `en/_navbar.md` 中加链接 |
+| 主题色 / 字体        | `index.html` 的 `<head>` 内加 CSS 变量                          |
 
 ## 微信公众号二维码（可选）
 
@@ -99,6 +109,46 @@ wechat: {
 - 悬停、键盘聚焦或点击展开卡片；点击按钮可固定展开，按 `Esc` 或点击外部收起。
 - 设 `enabled: false` 可以显式关闭。
 - 卡片背景和文字使用主题变量，自动适配浅色 / 深色模式。
+
+## 中英文切换
+
+默认中文在根目录，英文在 `en/`。右下角「中 / EN」按钮会保留当前页面路径。
+
+英文示例只放必要文件：
+
+```text
+en/
+├── README.md          # 英文首页
+├── _coverpage.md      # 英文封面
+├── _sidebar.md        # 英文侧边栏
+├── _navbar.md         # 英文顶部导航
+├── _404.md            # 英文 404
+└── guide/
+    └── start.md       # 一个英文子页面示例
+```
+
+新增英文页面时：
+
+1. 在 `en/` 下创建与中文页面同名的 Markdown 文件，例如 `en/guide/faq.md`；
+2. 在 `en/_sidebar.md`（和按需在 `en/_navbar.md`）中加入链接；
+3. 英文页面通过 `#/en/guide/faq` 访问。
+
+界面文案在 `index.html` 中按路径配置，例如：
+
+```js
+search: {
+  placeholder: {
+    '/en/': 'Search',
+    '/': '搜索',
+  },
+},
+```
+
+注意：
+
+- 当前只演示中英两种语言；3 种以上建议参考完整版 `docsify-demo`，或把语言列表改成注册表。
+- `fallbackLanguages: ['en']` 会让缺失的英文页面回退到中文同名页面；如果希望缺失时直接 404，删除这一项即可。
+- 英文页面的图片、侧边栏和导航都放在 `en/` 下，不要混到根目录。
 
 ## 设为 GitHub Template repository
 
@@ -123,9 +173,9 @@ gh api -X PATCH repos/OWNER/REPO -F is_template=true
 
 ## 刻意不包含
 
-精简版专注“单语言文档站点”这条主线：
+精简版专注轻量文档站点，内置中英双语示例：
 
-- 多语言 / `en/` / 语言切换
+- 3 种以上语言
 - 捐赠页与收款码
 - 顶部导航下拉菜单
 
@@ -141,15 +191,16 @@ gh api -X PATCH repos/OWNER/REPO -F is_template=true
 
 ## 常见定制
 
-| 需求             | 做法                                                                                     |
-| ---------------- | ---------------------------------------------------------------------------------------- |
-| 换主题色         | 在 `index.html` 的 `<head>` 内加 `<style>:root{--theme-color:#e11d48;}</style>`          |
-| 换字体           | 设置 `--font-family`、`--font-family-mono` 主题变量                                      |
-| 开关深色模式     | 删除深色样式 `<link>`、`_script/theme-toggle.js` 和 `_style/custom.css`                  |
-| 开关公众号二维码 | 在 `index.html` 的 `wechat` 配置中填写 `qrcode`；删除该配置或设 `enabled: false` 关闭    |
-| 关闭搜索 / 分页  | 删除 `index.html` 中对应的 `<script>` 与 `$docsify` 配置项                               |
-| 使用 CDN         | 把 `_script/`、`_style/` 的引用换成 `https://cdn.jsdelivr.net/npm/docsify@5/...`         |
-| 增加多语言       | 参考完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 的 `en/` 与 `i18n.js` |
+| 需求             | 做法                                                                                  |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| 换主题色         | 在 `index.html` 的 `<head>` 内加 `<style>:root{--theme-color:#e11d48;}</style>`       |
+| 换字体           | 设置 `--font-family`、`--font-family-mono` 主题变量                                   |
+| 开关深色模式     | 删除深色样式 `<link>`、`_script/theme-toggle.js` 和 `_style/custom.css`               |
+| 开关公众号二维码 | 在 `index.html` 的 `wechat` 配置中填写 `qrcode`；删除该配置或设 `enabled: false` 关闭 |
+| 关闭搜索 / 分页  | 删除 `index.html` 中对应的 `<script>` 与 `$docsify` 配置项                            |
+| 使用 CDN         | 把 `_script/`、`_style/` 的引用换成 `https://cdn.jsdelivr.net/npm/docsify@5/...`      |
+| 关闭中英文切换   | 删除 `_script/i18n.js`、`en/`，以及 `index.html` 中的 `/en/` 配置和语言按钮样式       |
+| 增加第三种语言   | 参考完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 的语言注册表       |
 
 ## 代码与文档规范
 

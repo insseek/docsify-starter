@@ -36,6 +36,7 @@
   }
 
   const media = window.matchMedia('(prefers-color-scheme: dark)');
+  const i18n = window.$docsifyI18n;
 
   /** 读取用户手动选择；未选择或不可用时返回 null。 */
   function readChoice() {
@@ -76,9 +77,16 @@
   button.type = 'button';
   button.className = 'app-control';
 
+  /** 文案优先取 i18n 字典，保证与当前语言一致。 */
+  function labelFor(theme) {
+    const key = theme === 'dark' ? 'themeDark' : 'themeLight';
+    const translated = i18n ? i18n.t(key) : null;
+    return translated || LABELS[theme];
+  }
+
   function updateButton() {
     const isDark = effectiveTheme() === 'dark';
-    const label = LABELS[isDark ? 'light' : 'dark'];
+    const label = labelFor(isDark ? 'light' : 'dark');
     button.innerHTML = isDark ? ICONS.dark : ICONS.light;
     button.setAttribute('aria-label', label);
     button.setAttribute('aria-pressed', String(isDark));
@@ -97,6 +105,9 @@
     paint(media.matches ? 'dark' : 'light');
     updateButton();
   });
+
+  // 语言变化后同步按钮的无障碍名称。
+  document.addEventListener('docsify:i18n:change', updateButton);
 
   // 未手动选择时，跟随系统变化。
   media.addEventListener('change', () => {

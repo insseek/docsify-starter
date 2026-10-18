@@ -42,6 +42,41 @@ window.$docsify = {
 - `subMaxLevel: 3`：在侧边栏中显示页面内 `##`、`###` 标题；
 - `maxLevel: 4`：目录（TOC）抓取的最大标题层级。
 
+## 中英文切换
+
+默认中文在根目录，英文在 `en/`。右下角「中 / EN」按钮会保留当前页面路径。
+
+英文示例文件：
+
+```text
+en/
+├── README.md
+├── _coverpage.md
+├── _sidebar.md
+├── _navbar.md
+├── _404.md
+└── guide/start.md
+```
+
+新增英文页面：
+
+1. 在 `en/` 下创建与中文页面同名的 `.md` 文件；
+2. 在 `en/_sidebar.md` 中加入链接；
+3. 通过 `#/en/...` 访问。
+
+界面文案按路径配置，例如：
+
+```js
+search: {
+  placeholder: {
+    '/en/': 'Search',
+    '/': '搜索',
+  },
+},
+```
+
+`fallbackLanguages: ['en']` 会让缺失的英文页面回退到中文同名页面；删除它则直接显示 404。
+
 ## 全文搜索
 
 ```js
@@ -116,9 +151,9 @@ wechat: {
 
 ## 按需扩展
 
-精简版只保留单语言文档站点的核心能力。需要以下功能时，可从完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 取用：
+精简版只保留轻量文档站点的核心能力（含中英双语示例）。需要以下功能时，可从完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 取用：
 
-- 中英文切换（`i18n.js` + `en/` 目录）
+- 3 种以上语言
 - 捐赠页（微信支付 / 支付宝）
 - 顶部导航下拉菜单
 

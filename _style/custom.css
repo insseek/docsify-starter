@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
    Docsify Starter — 自定义样式
 
-   右下角深色模式按钮，以及可选的微信公众号二维码。
+   右下角语言 / 主题按钮，以及可选的微信公众号二维码。
    --------------------------------------------------------------------------- */
 
 .app-controls {
@@ -55,15 +55,23 @@
   height: 20px;
 }
 
-/* 主题按钮在下；公众号按钮（可选）在其下方 */
-#app-controls #theme-toggle {
+/* 从上到下：语言 → 主题 → 公众号（可选） */
+#app-controls #language-toggle {
   order: 1;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+#app-controls #theme-toggle {
+  order: 2;
 }
 
 /* 可选微信公众号二维码 */
 .wechat-control {
   position: relative;
-  order: 2;
+  order: 3;
   display: flex;
   flex: none;
 }
