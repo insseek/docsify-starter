@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
    Docsify Starter — 自定义样式
 
-   只保留右下角深色模式按钮；语言、公众号、捐赠等功能不在精简版中。
+   右下角深色模式按钮，以及可选的微信公众号二维码。
    --------------------------------------------------------------------------- */
 
 .app-controls {
@@ -55,6 +55,77 @@
   height: 20px;
 }
 
+/* 主题按钮在下；公众号按钮（可选）在其下方 */
+#app-controls #theme-toggle {
+  order: 1;
+}
+
+/* 可选微信公众号二维码 */
+.wechat-control {
+  position: relative;
+  order: 2;
+  display: flex;
+  flex: none;
+}
+
+.wechat-panel {
+  position: absolute;
+  right: calc(100% + 0.75rem);
+  bottom: 0;
+  z-index: 1;
+  width: min(230px, calc(100vw - 7rem));
+  padding: 10px;
+  border: 1px solid var(--sidebar-border-color, rgba(127, 127, 127, 0.25));
+  border-radius: 12px;
+  background: var(--color-bg, #fff);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease,
+    visibility 0.15s ease;
+}
+
+/* 透明桥接区域，避免鼠标从按钮移向卡片时经过间隙导致收起 */
+.wechat-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -0.75rem;
+  bottom: 0;
+  width: 0.75rem;
+}
+
+.wechat-control.is-open .wechat-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.wechat-qrcode {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.wechat-text {
+  margin: 0.55rem 0 0.05rem;
+  color: var(--theme-color-6, var(--theme-color, #0b85d7));
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  text-wrap: balance;
+}
+
 @media screen and (max-width: 640px) {
   .app-controls {
     right: 0.9rem;
@@ -79,7 +150,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #app-controls .app-control {
+  #app-controls .app-control,
+  .wechat-panel {
     transition: none;
   }
 

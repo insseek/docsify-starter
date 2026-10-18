@@ -95,6 +95,12 @@
           crossChapter: true,
           crossChapterText: true,
         },
+
+        // 微信公众号二维码（可选）：填写 qrcode 后显示右下角按钮；不填则不显示
+        // wechat: {
+        //   qrcode: '_media/wechat-qrcode.png',
+        //   text: '微信扫码　关注公众号',
+        // },
       };
     </script>
 
@@ -106,5 +112,7 @@
     <script src="_script/docsify-pagination@2.10.1.min.js"></script>
     <!-- 深色模式切换（右下角按钮，双击恢复跟随系统） -->
     <script src="_script/theme-toggle.js"></script>
+    <!-- 可选微信公众号二维码（填写 $docsify.wechat 后生效） -->
+    <script src="_script/wechat.js"></script>
   </body>
 </html>

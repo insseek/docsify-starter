@@ -99,12 +99,26 @@ pagination: {
 
 不需要深色模式时，删除上面的 `<link>`、`_script/theme-toggle.js` 和 `_style/custom.css` 即可。
 
+## 微信公众号二维码（可选）
+
+默认不显示。把二维码图片放到 `_media/`，然后在 `index.html` 中配置：
+
+```js
+wechat: {
+  qrcode: '_media/wechat-qrcode.png',
+  text: '微信扫码　关注公众号',
+},
+```
+
+- 只有填写 `qrcode` 后，右下角才会出现按钮；`enabled: false` 可显式关闭。
+- 悬停、键盘聚焦或点击展开；点击按钮固定展开，按 `Esc` 或点击外部收起。
+- 卡片自动适配浅色 / 深色模式。
+
 ## 按需扩展
 
 精简版只保留单语言文档站点的核心能力。需要以下功能时，可从完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 取用：
 
 - 中英文切换（`i18n.js` + `en/` 目录）
-- 微信公众号二维码
 - 捐赠页（微信支付 / 支付宝）
 - 顶部导航下拉菜单
 
