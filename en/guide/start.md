@@ -26,6 +26,6 @@ search: {
 
 ## Notes
 
-- The bottom-right language button preserves the current page.
+- The bottom-right language button switches between the `/` and `/en/` home pages.
 - Missing English pages fall back to the Chinese page (`fallbackLanguages: ['en']`).
 - See the root [README](../../README.md) for the full Chinese documentation.

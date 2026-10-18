@@ -5,7 +5,7 @@
 ## 这是什么
 
 - **Docsify 5.0.0**：运行时把 Markdown 渲染成网站，不需要生成静态 HTML。
-- **中英文切换**：默认中文在根目录，英文示例在 `en/`；右下角「中 / EN」按钮切换，并保留当前页面。
+- **中英文切换**：默认中文在根目录，英文示例在 `en/`；右下角「中 / EN」按钮在 `/` 与 `/en/` 之间切换。
 - **开箱即用**：侧边栏、顶部导航、封面页、全文搜索、上一节 / 下一节、404、深色模式。
 - **可选公众号二维码**：默认关闭，填写配置后显示右下角悬浮按钮。
 - **资源本地化**：`_script/` 与 `_style/` 内是完整运行文件，不依赖外部 CDN，离线也能预览。
@@ -38,7 +38,7 @@ docsify-starter/
 │   ├── docsify@5.min.js            # Docsify 5.0.0
 │   ├── docsify-search@5.min.js     # 全文搜索插件
 │   ├── docsify-pagination@2.10.1.min.js  # 上一节/下一节插件
-│   ├── i18n.js                     # 中英文切换
+│   ├── language-toggle.js          # 中英文切换
 │   ├── theme-toggle.js             # 深色模式切换
 │   └── wechat.js                   # 可选微信公众号二维码
 ├── _style/
@@ -112,7 +112,7 @@ wechat: {
 
 ## 中英文切换
 
-默认中文在根目录，英文在 `en/`。右下角「中 / EN」按钮会保留当前页面路径。
+默认中文在根目录，英文在 `en/`。右下角「中 / EN」按钮直接切换到另一种语言的首页（`/` ↔ `/en/`）。
 
 英文示例只放必要文件：
 
@@ -191,16 +191,16 @@ gh api -X PATCH repos/OWNER/REPO -F is_template=true
 
 ## 常见定制
 
-| 需求             | 做法                                                                                  |
-| ---------------- | ------------------------------------------------------------------------------------- |
-| 换主题色         | 在 `index.html` 的 `<head>` 内加 `<style>:root{--theme-color:#e11d48;}</style>`       |
-| 换字体           | 设置 `--font-family`、`--font-family-mono` 主题变量                                   |
-| 开关深色模式     | 删除深色样式 `<link>`、`_script/theme-toggle.js` 和 `_style/custom.css`               |
-| 开关公众号二维码 | 在 `index.html` 的 `wechat` 配置中填写 `qrcode`；删除该配置或设 `enabled: false` 关闭 |
-| 关闭搜索 / 分页  | 删除 `index.html` 中对应的 `<script>` 与 `$docsify` 配置项                            |
-| 使用 CDN         | 把 `_script/`、`_style/` 的引用换成 `https://cdn.jsdelivr.net/npm/docsify@5/...`      |
-| 关闭中英文切换   | 删除 `_script/i18n.js`、`en/`，以及 `index.html` 中的 `/en/` 配置和语言按钮样式       |
-| 增加第三种语言   | 参考完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 的语言注册表       |
+| 需求             | 做法                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------ |
+| 换主题色         | 在 `index.html` 的 `<head>` 内加 `<style>:root{--theme-color:#e11d48;}</style>`            |
+| 换字体           | 设置 `--font-family`、`--font-family-mono` 主题变量                                        |
+| 开关深色模式     | 删除深色样式 `<link>`、`_script/theme-toggle.js` 和 `_style/custom.css`                    |
+| 开关公众号二维码 | 在 `index.html` 的 `wechat` 配置中填写 `qrcode`；删除该配置或设 `enabled: false` 关闭      |
+| 关闭搜索 / 分页  | 删除 `index.html` 中对应的 `<script>` 与 `$docsify` 配置项                                 |
+| 使用 CDN         | 把 `_script/`、`_style/` 的引用换成 `https://cdn.jsdelivr.net/npm/docsify@5/...`           |
+| 关闭中英文切换   | 删除 `_script/language-toggle.js`、`en/`，以及 `index.html` 中的 `/en/` 配置和语言按钮样式 |
+| 增加第三种语言   | 参考完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 的语言注册表            |
 
 ## 代码与文档规范
 
