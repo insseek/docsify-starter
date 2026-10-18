@@ -42,40 +42,17 @@ window.$docsify = {
 - `subMaxLevel: 3`：在侧边栏中显示页面内 `##`、`###` 标题；
 - `maxLevel: 4`：目录（TOC）抓取的最大标题层级。
 
-## 中英文切换
+## 中英文切换（可选）
 
-默认中文在根目录，英文在 `en/`。右下角「中 / EN」按钮直接切换到另一种语言的首页（`/` ↔ `/en/`）。
+默认不启用。`en/` 下有一套最小英文示例，但 `index.html` 没有 `/en/` 配置，也不加载语言按钮。
 
-英文示例文件：
+需要启用时：
 
-```text
-en/
-├── README.md
-├── _coverpage.md
-├── _sidebar.md
-├── _navbar.md
-├── _404.md
-└── guide/start.md
-```
+1. 在 `index.html` 中加载 `_script/language-toggle.js`；
+2. 按 README 的「中英文切换（可选）」补上 `/en/` 配置；
+3. 新增英文页放在 `en/`，并更新 `en/_sidebar.md`。
 
-新增英文页面：
-
-1. 在 `en/` 下创建与中文页面同名的 `.md` 文件；
-2. 在 `en/_sidebar.md` 中加入链接；
-3. 通过 `#/en/...` 访问。
-
-界面文案按路径配置，例如：
-
-```js
-search: {
-  placeholder: {
-    '/en/': 'Search',
-    '/': '搜索',
-  },
-},
-```
-
-`fallbackLanguages: ['en']` 会让缺失的英文页面回退到中文同名页面；删除它则直接显示 404。
+按钮只做 `/` ↔ `/en/` 路由切换。3 种以上语言不在本模板范围内，Docsify 的 path-keyed 配置不适合大量语言。
 
 ## 全文搜索
 
@@ -151,7 +128,7 @@ wechat: {
 
 ## 按需扩展
 
-精简版只保留轻量文档站点的核心能力（含中英双语示例）。需要以下功能时，可从完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 取用：
+精简版只保留轻量文档站点的核心能力；中英切换需要按 README 手动启用。以下内容不在本模板范围内：
 
 - 3 种以上语言
 - 捐赠页（微信支付 / 支付宝）

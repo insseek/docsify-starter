@@ -26,6 +26,6 @@ search: {
 
 ## Notes
 
-- The bottom-right language button switches between the `/` and `/en/` home pages.
-- Missing English pages fall back to the Chinese page (`fallbackLanguages: ['en']`).
+- If language switching is enabled, the bottom-right button switches between the `/` and `/en/` home pages.
+- If `fallbackLanguages: ['en']` is enabled, missing English pages fall back to the Chinese page.
 - See the root [README](../../README.md) for the full Chinese documentation.

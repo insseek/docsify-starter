@@ -1,15 +1,16 @@
 # Docsify Starter
 
-> 一个精简的 Docsify v5 起步模板：无构建、可离线，内置搜索、分页、封面、404、深色模式与中英文切换。
+> 一个精简的 Docsify v5 单语言起步模板：无构建、可离线，内置搜索、分页、封面、404 与深色模式；另附可选中英切换示例。
 
 ## 这是什么
 
 - **Docsify 5.0.0**：运行时把 Markdown 渲染成网站，不需要生成静态 HTML。
-- **中英文切换**：默认中文在根目录，英文示例在 `en/`；右下角「中 / EN」按钮在 `/` 与 `/en/` 之间切换。
+- **单语言默认**：中文在根目录，开箱即用；默认不启用语言切换。
+- **可选中英示例**：`en/` 下保留最小英文示例，需要时按 README 启用。
 - **开箱即用**：侧边栏、顶部导航、封面页、全文搜索、上一节 / 下一节、404、深色模式。
 - **可选公众号二维码**：默认关闭，填写配置后显示右下角悬浮按钮。
 - **资源本地化**：`_script/` 与 `_style/` 内是完整运行文件，不依赖外部 CDN，离线也能预览。
-- **刻意精简**：内置中英双语示例，但不包含 3 种以上语言、捐赠页和自定义导航下拉；更多能力可从完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 取用。
+- **刻意精简**：默认不启用中英切换，也不包含 3 种以上语言、捐赠页和自定义导航下拉；需要更多能力时按需扩展。
 
 ## 目录结构
 
@@ -24,7 +25,7 @@ docsify-starter/
 ├── about.md                   # 关于（占位页）
 ├── guide/
 │   └── start.md               # 快速开始 / 配置说明
-├── en/                        # 英文示例（只放必要文件）
+├── en/                        # 可选英文示例（默认未启用）
 │   ├── README.md
 │   ├── _coverpage.md
 │   ├── _sidebar.md
@@ -38,7 +39,7 @@ docsify-starter/
 │   ├── docsify@5.min.js            # Docsify 5.0.0
 │   ├── docsify-search@5.min.js     # 全文搜索插件
 │   ├── docsify-pagination@2.10.1.min.js  # 上一节/下一节插件
-│   ├── language-toggle.js          # 中英文切换
+│   ├── language-toggle.js          # 可选中英文切换（默认未加载）
 │   ├── theme-toggle.js             # 深色模式切换
 │   └── wechat.js                   # 可选微信公众号二维码
 ├── _style/
@@ -91,7 +92,7 @@ python3 -m http.server 3000
 | 404 页               | `_404.md`                                                       |
 | GitHub 入口          | `index.html` 的 `repo`（完整 URL，留空隐藏）                    |
 | 公众号二维码（可选） | `index.html` 的 `wechat` 配置，填写 `qrcode` 后显示             |
-| 英文页面             | 放在 `en/` 下，并在 `en/_sidebar.md` / `en/_navbar.md` 中加链接 |
+| 英文页面（可选）     | 放在 `en/` 下，并在 `en/_sidebar.md` / `en/_navbar.md` 中加链接 |
 | 主题色 / 字体        | `index.html` 的 `<head>` 内加 CSS 变量                          |
 
 ## 微信公众号二维码（可选）
@@ -110,45 +111,62 @@ wechat: {
 - 设 `enabled: false` 可以显式关闭。
 - 卡片背景和文字使用主题变量，自动适配浅色 / 深色模式。
 
-## 中英文切换
+## 中英文切换（可选）
 
-默认中文在根目录，英文在 `en/`。右下角「中 / EN」按钮直接切换到另一种语言的首页（`/` ↔ `/en/`）。
+**默认关闭**：`index.html` 中没有 `/en/` 配置，也没有加载语言切换脚本；`en/` 只是保留下来的一套最小英文示例。
 
-英文示例只放必要文件：
+如果项目确实需要中英切换，做两步。
 
-```text
-en/
-├── README.md          # 英文首页
-├── _coverpage.md      # 英文封面
-├── _sidebar.md        # 英文侧边栏
-├── _navbar.md         # 英文顶部导航
-├── _404.md            # 英文 404
-└── guide/
-    └── start.md       # 一个英文子页面示例
+**第一步：加载语言按钮脚本**（放在主题脚本之前）。
+
+```html
+<script src="_script/language-toggle.js"></script>
 ```
 
-新增英文页面时：
-
-1. 在 `en/` 下创建与中文页面同名的 Markdown 文件，例如 `en/guide/faq.md`；
-2. 在 `en/_sidebar.md`（和按需在 `en/_navbar.md`）中加入链接；
-3. 英文页面通过 `#/en/guide/faq` 访问。
-
-界面文案在 `index.html` 中按路径配置，例如：
+**第二步：为需要本地化的配置补上 `/en/` 路径。** 最小可用配置如下：
 
 ```js
+nameLink: {
+  '/en/': '#/en/',
+  '/': '#/',
+},
+coverpage: {
+  '/en/': '_coverpage.md',
+  '/': '_coverpage.md',
+},
+notFoundPage: {
+  '/en/': 'en/_404.md',
+  '/': '_404.md',
+},
+fallbackLanguages: ['en'],
+skipLink: {
+  '/en/': 'Skip to main content',
+  '/': '跳到主要内容',
+},
 search: {
   placeholder: {
     '/en/': 'Search',
     '/': '搜索',
   },
+  paths: 'auto',
+  depth: 2,
+},
+pagination: {
+  previousText: { '/en/': 'Previous', '/': '上一节' },
+  nextText: { '/en/': 'Next', '/': '下一节' },
+  crossChapter: true,
+  crossChapterText: true,
 },
 ```
 
-注意：
+启用后：
 
-- 当前只演示中英两种语言；3 种以上建议参考完整版 `docsify-demo`，或把语言列表改成注册表。
-- `fallbackLanguages: ['en']` 会让缺失的英文页面回退到中文同名页面；如果希望缺失时直接 404，删除这一项即可。
-- 英文页面的图片、侧边栏和导航都放在 `en/` 下，不要混到根目录。
+- 右下角出现「中 / EN」按钮，只做路由切换：`/` ↔ `/en/`；
+- `en/` 下包含英文首页、封面、侧边栏、导航、404 和一个英文子页面示例；
+- 新增英文页时，在 `en/` 下创建同名 `.md` 文件，并在 `en/_sidebar.md` 中加入链接；
+- `fallbackLanguages: ['en']` 让缺失的英文页回退到中文同名页；不需要可删除。
+
+> 注意：这是 Docsify 的 path-keyed 配置方式，只适合少量语言。3 种以上语言不建议这样一项项手写；Docsify 没有通用 i18n 框架，多语言方案请自行评估（生成配置、改用支持 i18n 的静态站点工具等）。
 
 ## 设为 GitHub Template repository
 

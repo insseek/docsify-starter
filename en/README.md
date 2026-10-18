@@ -6,7 +6,7 @@ This is the English homepage. English docs live under `en/`, mirroring the root 
 
 - Plain Markdown, no build step
 - Sidebar, navbar, cover, full-text search, previous / next, 404
-- Dark mode and a bottom-right language switch
+- Dark mode; language switching is optional (see the Chinese README to enable it)
 - Local assets, no CDN dependency
 
 [Getting started](/en/guide/start.md)
