@@ -10,7 +10,7 @@
 - **开箱即用**：侧边栏、顶部导航、封面页、全文搜索、上一节 / 下一节、404、深色模式。
 - **可选公众号二维码**：默认关闭，填写配置后显示右下角悬浮按钮。
 - **资源本地化**：`_script/` 与 `_style/` 内是完整运行文件，不依赖外部 CDN，离线也能预览。
-- **刻意精简**：默认不启用中英切换，也不包含 3 种以上语言、捐赠页和自定义导航下拉；需要更多能力时按需扩展。
+- **刻意精简**：默认不启用中英切换；其他能力按需扩展。
 
 ## 目录结构
 
@@ -166,7 +166,7 @@ pagination: {
 - 新增英文页时，在 `en/` 下创建同名 `.md` 文件，并在 `en/_sidebar.md` 中加入链接；
 - `fallbackLanguages: ['en']` 让缺失的英文页回退到中文同名页；不需要可删除。
 
-> 注意：这是 Docsify 的 path-keyed 配置方式，只适合少量语言。3 种以上语言不建议这样一项项手写；Docsify 没有通用 i18n 框架，多语言方案请自行评估（生成配置、改用支持 i18n 的静态站点工具等）。
+> 注意：这是 Docsify 的 path-keyed 配置方式；语言数量较多时，可以自行生成配置，或评估更合适的静态站点工具。
 
 ## 设为 GitHub Template repository
 
@@ -189,16 +189,6 @@ gh api -X PATCH repos/OWNER/REPO -F is_template=true
 - 公开仓库最适合作为开放模板；私有模板只有有权限的人可以使用。
 - 想取消模板时，回到同一设置取消勾选即可。
 
-## 刻意不包含
-
-精简版专注轻量文档站点，内置中英双语示例：
-
-- 3 种以上语言
-- 捐赠页与收款码
-- 顶部导航下拉菜单
-
-这些能力都在完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 中；需要时按需取用，而不是让每个新项目都从最大集合开始删。
-
 ## 部署
 
 这是一个纯静态站点，把整个目录发布到任意静态托管即可：
@@ -209,16 +199,16 @@ gh api -X PATCH repos/OWNER/REPO -F is_template=true
 
 ## 常见定制
 
-| 需求             | 做法                                                                                       |
-| ---------------- | ------------------------------------------------------------------------------------------ |
-| 换主题色         | 在 `index.html` 的 `<head>` 内加 `<style>:root{--theme-color:#e11d48;}</style>`            |
-| 换字体           | 设置 `--font-family`、`--font-family-mono` 主题变量                                        |
-| 开关深色模式     | 删除深色样式 `<link>`、`_script/theme-toggle.js` 和 `_style/custom.css`                    |
-| 开关公众号二维码 | 在 `index.html` 的 `wechat` 配置中填写 `qrcode`；删除该配置或设 `enabled: false` 关闭      |
-| 关闭搜索 / 分页  | 删除 `index.html` 中对应的 `<script>` 与 `$docsify` 配置项                                 |
-| 使用 CDN         | 把 `_script/`、`_style/` 的引用换成 `https://cdn.jsdelivr.net/npm/docsify@5/...`           |
-| 关闭中英文切换   | 删除 `_script/language-toggle.js`、`en/`，以及 `index.html` 中的 `/en/` 配置和语言按钮样式 |
-| 增加第三种语言   | 参考完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 的语言注册表            |
+| 需求             | 做法                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| 换主题色         | 在 `index.html` 的 `<head>` 内加 `<style>:root{--theme-color:#e11d48;}</style>`             |
+| 换字体           | 设置 `--font-family`、`--font-family-mono` 主题变量                                         |
+| 开关深色模式     | 删除深色样式 `<link>`、`_script/theme-toggle.js` 和 `_style/custom.css`                     |
+| 开关公众号二维码 | 在 `index.html` 的 `wechat` 配置中填写 `qrcode`；删除该配置或设 `enabled: false` 关闭       |
+| 关闭搜索 / 分页  | 删除 `index.html` 中对应的 `<script>` 与 `$docsify` 配置项                                  |
+| 使用 CDN         | 把 `_script/`、`_style/` 的引用换成 `https://cdn.jsdelivr.net/npm/docsify@5/...`            |
+| 启用中英文切换   | 按「中英文切换（可选）」添加脚本和 `/en/` 配置                                              |
+| 增加更多语言     | 自行扩展，或参考完整版 [docsify-demo](https://github.com/insseek/docsify-demo) 的语言注册表 |
 
 ## 代码与文档规范
 
